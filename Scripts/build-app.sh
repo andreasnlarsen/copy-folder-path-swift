@@ -21,6 +21,15 @@ cp "$EXECUTABLE" "$APP_DIR/Contents/MacOS/CopyFolderPath"
 cp "$ROOT_DIR/Resources/Info.plist" "$APP_DIR/Contents/Info.plist"
 cp "$ICON_FILE" "$APP_DIR/Contents/Resources/AppIcon.icns"
 
-codesign --force --sign - "$APP_DIR" >/dev/null
+# Local builds are signed ad hoc. A release sets CODESIGN_IDENTITY to a Developer ID,
+# which also turns on the hardened runtime that notarization requires.
+CODESIGN_IDENTITY="${CODESIGN_IDENTITY:--}"
+if [[ "$CODESIGN_IDENTITY" == "-" ]]; then
+  codesign --force --sign - "$APP_DIR" >/dev/null
+else
+  codesign --force --options runtime --timestamp \
+    --entitlements "$ROOT_DIR/Resources/CopyFolderPath.entitlements" \
+    --sign "$CODESIGN_IDENTITY" "$APP_DIR" >/dev/null
+fi
 
 echo "$APP_DIR"

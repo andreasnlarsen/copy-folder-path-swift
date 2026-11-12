@@ -326,7 +326,7 @@ Toast visual requirements:
 ### Later
 
 - [ ] REQ-020: User-configurable shortcut.
-- [ ] REQ-021: Developer ID signing and notarization.
+- [x] REQ-021: Developer ID signing and notarization (`Scripts/release.sh`; 0.1.0 accepted by Apple on 2026-11-12).
 
 ## 16. Risks & Unknowns
 

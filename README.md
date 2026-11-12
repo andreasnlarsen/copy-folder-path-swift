@@ -4,9 +4,19 @@ Native macOS utility for copying selected Finder item paths with `Shift-Command-
 
 This repo contains a small Swift/AppKit menu-bar app that replaces the Keyboard Maestro HTML-toast workflow with a native non-activating toast.
 
+Free and open source under the [MIT licence](LICENSE). Requires macOS 13 or later.
+
 ## Install
 
-Build and install the app into `/Applications`:
+With Homebrew:
+
+```sh
+brew install --cask andreasnlarsen/tap/copy-folder-path
+```
+
+Or download `CopyFolderPath-<version>.zip` from [Releases](https://github.com/andreasnlarsen/copy-folder-path-swift/releases), unzip it, and move the app to `/Applications`. The app is signed with a Developer ID and notarized by Apple.
+
+To build and install from source instead:
 
 ```sh
 Scripts/package-app.sh

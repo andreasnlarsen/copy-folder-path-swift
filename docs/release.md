@@ -54,3 +54,22 @@ swift Scripts/generate-app-icon.swift
 ```
 
 The bundle uses `Resources/AppIcon.icns` through `CFBundleIconFile = AppIcon`.
+
+## Public Release
+
+A public release is signed with a Developer ID, notarized by Apple, and installed by others through Homebrew or a direct download.
+
+The release uses the `notchfocus-notary` notarization profile, the same one the other apps signed on this Mac use. It already exists here. On a new Mac a person creates it in their own terminal, because it asks for an app-specific password:
+
+```sh
+xcrun notarytool store-credentials notchfocus-notary --apple-id <apple-id> --team-id D79LWN85PJ
+```
+
+For each release:
+
+1. Raise `CFBundleShortVersionString` and `CFBundleVersion` in `Resources/Info.plist`.
+2. Run `Scripts/release.sh`. It runs the tests, builds, signs, notarizes, staples, and prints the zip path and its SHA-256.
+3. Publish the zip: `gh release create v<version> build/CopyFolderPath-<version>.zip`.
+4. Put the new version and SHA-256 in `Casks/copy-folder-path.rb` in the `andreasnlarsen/homebrew-tap` repository.
+
+The signing identity is named in one place, at the top of `Scripts/release.sh`. Changing it resets the Finder permission users have granted, so treat that as a release of its own and say so in its notes.
