@@ -14,6 +14,8 @@ With Homebrew:
 brew install --cask andreasnlarsen/tap/copy-folder-path
 ```
 
+Homebrew 6 and later ask you to trust taps outside the official catalogue. If the install is refused with "untrusted tap", run `brew trust andreasnlarsen/tap` once and install again.
+
 Or download `CopyFolderPath-<version>.zip` from [Releases](https://github.com/andreasnlarsen/copy-folder-path-swift/releases), unzip it, and move the app to `/Applications`. The app is signed with a Developer ID and notarized by Apple.
 
 To build and install from source instead:
